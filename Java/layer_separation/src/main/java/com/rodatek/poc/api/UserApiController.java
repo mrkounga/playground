@@ -9,22 +9,14 @@ import com.rodatek.common.restapi.ResourceService;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserApiController  extends AbstractController<UserResource> implements UserApi {
+public class UserApiController  extends AbstractController<UserResource>  {
 
+	private UserResourceService resourceService;
+	
 	public UserApiController(ResourceService<UserResource> service) {
 		super(service);
 		// TODO Auto-generated constructor stub
 	}
-
-	
-
-	
-	
-	
-	
-
-	
-
 	
 
 }

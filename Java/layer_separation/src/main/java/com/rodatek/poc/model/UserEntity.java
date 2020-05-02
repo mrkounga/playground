@@ -1,23 +1,11 @@
 package com.rodatek.poc.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.immutables.value.Value;
 
-import com.rodatek.common.model.JpaEntity;
+import com.rodatek.common.model.IEntity;
+import com.rodatek.domain.user.User;
 
-import lombok.Value;
-
-@Entity
-@Value
-public  final class UserEntity implements JpaEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private final Long id;
-	private final String username;
-	private final String surname;
-	private final String firstName;
-	private final String email;
+@Value.Immutable
+public interface UserEntity extends User, IEntity {
 
 }

@@ -1,6 +1,6 @@
 package com.rodatek.common.persistence;
 
 
-public interface PersistencePreconditionHelper{
+public final class PersistencePreconditionHelper{
 
 }

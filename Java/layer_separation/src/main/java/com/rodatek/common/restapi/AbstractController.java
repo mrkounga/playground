@@ -1,26 +1,14 @@
 package com.rodatek.common.restapi;
 
-import java.util.Optional;
 
-public class AbstractController<R extends IResource> implements ApiOperation<R> {
 
-	private ResourceService<R> service;
+public class AbstractController<R extends IResource>  {
+
+	protected ResourceService<R> resourceService;
 
 	public AbstractController(ResourceService<R> service) {
-		this.service = service;
+		this.resourceService = service;
 
 	}
-
-	public R createResource(R resource) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Optional<R> getResource(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	
 }

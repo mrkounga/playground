@@ -5,9 +5,11 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rodatek.common.restapi.IResource;
 
+import lombok.Builder;
 import lombok.Value;
 
 @Validated
+@Builder
 @Value
 public class UserResource implements IResource {
 
@@ -28,6 +30,12 @@ public class UserResource implements IResource {
 
 	@JsonProperty("email")
 	private String email;
+
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }
