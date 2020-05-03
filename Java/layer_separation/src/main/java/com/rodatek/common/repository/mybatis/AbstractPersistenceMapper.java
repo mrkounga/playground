@@ -1,4 +1,4 @@
-package com.rodatek.common.persitence.mybatis;
+package com.rodatek.common.repository.mybatis;
 
 import java.util.Optional;
 

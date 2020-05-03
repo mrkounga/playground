@@ -1,6 +1,6 @@
 package com.rodatek.example.model;
 
-import com.rodatek.common.persistence.mongo.MongoEntity;
+import com.rodatek.common.repository.mongo.MongoEntity;
 
 import lombok.Value;
 

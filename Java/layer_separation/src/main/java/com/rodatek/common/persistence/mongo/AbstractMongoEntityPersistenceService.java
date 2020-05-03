@@ -3,6 +3,8 @@ package com.rodatek.common.persistence.mongo;
 import java.util.Optional;
 
 import com.rodatek.common.persistence.PersistenceService;
+import com.rodatek.common.repository.mongo.BaseMongoRepository;
+import com.rodatek.common.repository.mongo.MongoEntity;
 
 //@Service
 //@Qualifier("mongo")

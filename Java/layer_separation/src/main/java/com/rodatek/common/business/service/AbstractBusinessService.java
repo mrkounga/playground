@@ -19,7 +19,7 @@ public abstract class AbstractBusinessService<D extends IDto> implements Busines
 
 	@Override
 	public Optional<D> findDtoById(Long id) {
-		return service.findEntityById(id);
+		return service.findById(id);
 	}
 
 	@Override

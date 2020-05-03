@@ -1,4 +1,4 @@
-package com.rodatek.common.persistence.jpa;
+package com.rodatek.common.repository.jpa;
 
 
 import com.rodatek.common.model.SqlEntity;

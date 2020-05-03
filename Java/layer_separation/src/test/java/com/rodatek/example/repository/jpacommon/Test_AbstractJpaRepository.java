@@ -9,21 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.rodatek.common.persistence.jpa.BaseJpaRepository;
-import com.rodatek.common.persistence.jpa.JpaEntity;
+
+import com.rodatek.common.repository.config.RepositoryConfig;
+import com.rodatek.common.repository.jpa.BaseJpaRepository;
+import com.rodatek.common.repository.jpa.JpaEntity;
 
 /**
  * @author koungam
  *
  */
-@SpringJUnitConfig
+@SpringJUnitConfig()
 @DataJpaTest
+//@ContextConfiguration(classes = { RepositoryConfig.class }, loader = AnnotationConfigContextLoader.class)
 public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 
 	@Autowired
@@ -40,8 +46,11 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 	}
 
 	protected abstract E createEntity();
+	
+	protected abstract void testUpdate();
 
 	@Test
+	@DisplayName("Test - Entity Manager Not Null")
 	public void givenAndEntitymanager_WhenAutorired_ThenItshouldntbeNull() {
 		// Arrange
 
@@ -54,23 +63,22 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 	// Create
 
 	@Test
+	@DisplayName("Test - Entity Creation...")
 	public void testCreate() {
-		// arrange
-		E newEntity = createEntity();
-
 		// act
-		E persistedEntity = getRepository().save(newEntity);
-
+		E persistedEntity = getRepository().save(createEntity());
+		
 		// assert
-		assertThat(persistedEntity.getId()).isNotNull();
+		assertThat(entityManager.getId(persistedEntity)).isNotNull();
 	}
 
 	// Read
 
 	@Test
+	@DisplayName("Test - Find Entity By Id")
 	public void testGetOne() {
 		// Arrange
-		E createdEntity = getRepository().save(createEntity());
+		E createdEntity = entityManager.persist(createEntity());
 
 		// Act
 		Optional<E> foundById = getRepository().findById(createdEntity.getId());
@@ -79,50 +87,38 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 		assertThat(foundById.get()).isEqualTo(createdEntity);
 	}
 
-	@Test
-	public void testUpdate() {
-		// Arrange
-
-		E createdEntity = getRepository().save(createEntity());
-		Optional<E> foundById = getRepository().findById(createdEntity.getId());
-
-		// Act
-		//E entityToUpdate = foundById
-
-		// Assert
-		assertThat(foundById.get()).isEqualTo(createdEntity);
-	}
-
+	
 	// Count
-
 	@Test
+	@DisplayName("Test - Count Entities")
 	public void testCount() {
 		// Arrange
 		long entityCount = createListEntities().size();
-		 List<E> entitiesFound=getRepository().saveAll(createListEntities());
-
-		// Act
-	
-		 long entityFoundCount=entitiesFound.size();
+		createListEntities().forEach(e ->entityManager.persist(e));
+		
+		// Act		
+		 long entityFoundCount=getRepository().count();
 
 		// Assert
 		 assertThat(entityCount).isEqualTo(entityFoundCount);
 	}
 
 	// Find all
-
 	@Test
+	@DisplayName("Test - Find All Entities")
 	public void testFindAll() {
-		// Arrange
-		List<E> entitiesFound=getRepository().saveAll(createListEntities());
-
-		// Act
+		//arrange
+		createListEntities().forEach(e ->entityManager.persist(e));
+		
+		// Act		
 		List<E> entities = getRepository().findAll();
 
 		// Assert
-		assertThat(entities).isNotEmpty();
+		assertThat(entities.containsAll(createListEntities()));
 	}
 
+	@Test
+	@DisplayName("Test - Find All Sort")
 	public void testFindAllSort() {
 		// Arrange
 
@@ -131,6 +127,8 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 		// Assert
 	}
 
+	@Test
+	@DisplayName("Test - Find All By Id Iterable of ID")
 	public void testFindAllByIdIterableOfID() {
 		// Arrange
 
@@ -139,6 +137,8 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 		// Assert
 	}
 
+	@Test
+	@DisplayName("Test - Save All  Iterable")
 	public void testSaveAllIterableOfS() {
 		// Arrange
 
@@ -147,62 +147,81 @@ public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
 		// Assert
 	}
 
+	@Test
+	@DisplayName("Test - Flush Entity")
 	public void testFlush() {
 		// Arrange
-
+		E createdEntity = entityManager.persist(createEntity());
 		// Act
-
+		getRepository().flush();
+		
 		// Assert
+		assertThat(createdEntity.getId()).isGreaterThan(0);
+		
 	}
 
+	@Test
+	@DisplayName("Test - Save And Flush")
 	public void testSaveAndFlush() {
 		// Arrange
 
 		// Act
-
+		E createdEntity =getRepository().saveAndFlush(createEntity());
+		
 		// Assert
+		assertThat(createdEntity.getId()).isGreaterThan(0);		
 	}
 
+	@Test
+	@DisplayName("Test - Delete List of Entities In Batch")
 	public void testDeleteInBatch() {
 		// Arrange
-
+		createListEntities().forEach(e ->entityManager.persist(e));
+		int toIndex=createListEntities().size();
+		int fromIndex = toIndex/2;
+		List<E> foundEntities = getRepository().findAll().subList(fromIndex, toIndex);
+		int counFoundEntities=foundEntities.size();
+		int entityLeft=toIndex-counFoundEntities;
+		
 		// Act
+		getRepository().deleteAll(foundEntities);
+		int countRemainingEntity = getRepository().findAll().size();
+		// Assert
+		assertThat(countRemainingEntity).isEqualTo(entityLeft);
+		
+	}
+	
+	@Test
+	@DisplayName("Test - Delete By Id")
+	public void testDeleteById() {
+		// Arrange
+		E createdEntity = entityManager.persist(createEntity());
+		
+		// Act
+		long found_id=createdEntity.getId();
+		getRepository().deleteById(found_id);
 
 		// Assert
+		assertThat(getRepository().existsById(found_id)).isFalse();
 	}
 
+
+	@Test
+	@DisplayName("Test - Delete All In Batch")
 	public void testDeleteAllInBatch() {
 		// Arrange
+		createListEntities().forEach(e ->entityManager.persist(e));
 
 		// Act
+		getRepository().deleteAllInBatch();
 
 		// Assert
+		assertThat(getRepository().count()).isEqualTo(0);
 	}
 
-	public void testFindAllExampleOfS() {
-		// Arrange
 
-		// Act
-
-		// Assert
-	}
-
-	public void testFindAllExampleOfSSort() {
-		// Arrange
-
-		// Act
-
-		// Assert
-	}
-
-	public void testFindAllSort1() {
-		// Arrange
-
-		// Act
-
-		// Assert
-	}
-
+	@Test
+	@DisplayName("Test - Find All Pageable")
 	public void testFindAllPageable() {
 		// Arrange
 

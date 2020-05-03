@@ -21,7 +21,7 @@ public class UserResource implements User, IResource {
 	private String username;
 
 	@JsonProperty("firstname")
-	private String firstname;
+	private String firstName;
 
 	@JsonProperty("surname")
 	private String surname;
@@ -38,11 +38,4 @@ public class UserResource implements User, IResource {
 		return false;
 	}
 
-	@Override
-	public String getFirsName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 }

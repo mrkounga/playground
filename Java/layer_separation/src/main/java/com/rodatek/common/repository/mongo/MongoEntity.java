@@ -1,4 +1,4 @@
-package com.rodatek.common.persistence.mongo;
+package com.rodatek.common.repository.mongo;
 
 import com.rodatek.common.model.NoSQLEntity;
 

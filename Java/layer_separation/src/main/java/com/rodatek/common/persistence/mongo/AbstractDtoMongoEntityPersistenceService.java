@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
 import com.rodatek.common.persistence.BaseRepository;
+import com.rodatek.common.repository.mongo.BaseMongoRepository;
+import com.rodatek.common.repository.mongo.MongoEntity;
 
 @Service
 @Qualifier("jpa")

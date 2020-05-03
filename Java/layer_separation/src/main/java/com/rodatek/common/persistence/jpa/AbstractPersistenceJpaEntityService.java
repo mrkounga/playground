@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.rodatek.common.persistence.PersistenceService;
+import com.rodatek.common.repository.jpa.BaseJpaRepository;
+import com.rodatek.common.repository.jpa.JpaEntity;
 
 @Service
 @Qualifier("jpa")

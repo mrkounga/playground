@@ -3,16 +3,21 @@ package com.rodatek.common.persistence.jpa;
 import java.util.Optional;
 
 import com.rodatek.common.business.domain.IDto;
+import com.rodatek.common.converter.Convertable;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
-
+import com.rodatek.common.persistence.BaseRepository;
+import com.rodatek.common.persistence.PersistenceDtoService;
+import com.rodatek.common.repository.jpa.BaseJpaRepository;
+import com.rodatek.common.repository.jpa.JpaEntity;
 
 public  abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends JpaEntity> extends AbstractDtoEntityPersistenceService<D,E> {
+
+	protected BaseJpaRepository<E> repository;
 	
-	protected  BaseJpaRepository<E> repository;
 	
-	public AbstractDtoJpaEntityPersistenceService(BaseJpaRepository<E> repo) {
+	public AbstractDtoJpaEntityPersistenceService(BaseRepository<E> repo) {
 		super(repo);
-		this.repository=repo;
+		
 	}
 
 	@Override
@@ -21,20 +26,20 @@ public  abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E 
 	}
 
 	@Override
-	public Optional<D> findEntityById(Long id) {
+	public Optional<D> findById(Long id) {
 		return Optional.of(convertToLayerObjectUp(repository.findById(id).get()));
 	}
 
 	@Override
 	public D update(D dto) {
 		return convertToLayerObjectUp(repository.save(convertToLayerObjectDown(dto)));
-		
+
 	}
 
 	@Override
 	public void delete(Long id) {
 		repository.deleteById(id);
-		
+
 	}
 
 }

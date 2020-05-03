@@ -1,4 +1,4 @@
-package com.rodatek.common.persistence.mongo;
+package com.rodatek.common.repository.mongo;
 
 //import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
