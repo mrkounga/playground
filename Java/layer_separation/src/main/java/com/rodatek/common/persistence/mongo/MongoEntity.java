@@ -1,7 +1,7 @@
 package com.rodatek.common.persistence.mongo;
 
-import com.rodatek.common.model.IEntity;
+import com.rodatek.common.model.NoSQLEntity;
 
-public interface MongoEntity extends IEntity{
+public interface MongoEntity extends NoSQLEntity{
 
 }

@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.persistence.PersistenceDtoService;
 
-public class AbstractBusinessService<D extends IDto> implements BusinessService<D> {
+public abstract class AbstractBusinessService<D extends IDto> implements BusinessService<D> {
 	
 	private PersistenceDtoService<D> service;
 	
@@ -17,8 +17,19 @@ public class AbstractBusinessService<D extends IDto> implements BusinessService<
 		return service.create(dto);
 	}
 
-	public Optional<D> getDtoById(Long id) {		
+	@Override
+	public Optional<D> findDtoById(Long id) {
 		return service.findEntityById(id);
+	}
+
+	@Override
+	public D updateDto(D dto) {		
+		return service.update(dto);
+	}
+
+	@Override
+	public void deleteDtoById(Long id) {
+		service.delete(id);
 	}
 
 }

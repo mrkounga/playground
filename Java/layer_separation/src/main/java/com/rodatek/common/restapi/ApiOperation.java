@@ -4,5 +4,7 @@ import java.util.Optional;
 
 public interface ApiOperation<R extends IResource>{
 	R createResource(R resource);
-	Optional<R> getResource(Long id);
+	Optional<R> findRessourceById(Long id);
+	void deleteResourceById(Long id);
+	R updateResource(R resource);
 }

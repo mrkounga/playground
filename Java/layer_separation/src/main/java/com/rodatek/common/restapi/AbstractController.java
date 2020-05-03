@@ -4,9 +4,9 @@ package com.rodatek.common.restapi;
 
 public class AbstractController<R extends IResource>  {
 
-	protected ResourceService<R> resourceService;
+	protected ControllerService<R> resourceService;
 
-	public AbstractController(ResourceService<R> service) {
+	public AbstractController(ControllerService<R> service) {
 		this.resourceService = service;
 
 	}

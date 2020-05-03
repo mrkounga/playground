@@ -3,8 +3,6 @@ package com.rodatek.common.persistence.mongo;
 //import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import com.rodatek.common.persistence.BaseRepository;
-
 
 
 @NoRepositoryBean

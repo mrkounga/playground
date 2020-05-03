@@ -1,15 +1,11 @@
 package com.rodatek.common.persistence.mongo;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.rodatek.common.business.domain.IDto;
-import com.rodatek.common.converter.Convertable;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
 import com.rodatek.common.persistence.BaseRepository;
-import com.rodatek.common.persistence.PersistenceDtoService;
 
 @Service
 @Qualifier("jpa")
