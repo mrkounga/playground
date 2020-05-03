@@ -10,14 +10,17 @@ import com.rodatek.common.persistence.PersistenceDtoService;
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
 import com.rodatek.common.repository.jpa.JpaEntity;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public  abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends JpaEntity> extends AbstractDtoEntityPersistenceService<D,E> {
 
 	protected BaseJpaRepository<E> repository;
 	
 	
-	public AbstractDtoJpaEntityPersistenceService(BaseRepository<E> repo) {
+	public AbstractDtoJpaEntityPersistenceService(BaseJpaRepository<E> repo) {
 		super(repo);
-		
+		this.repository=repo;
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import com.rodatek.example.repository.jpacommon.Test_AbstractJpaRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@DisplayName(value = "User Jpa repository Service")
 class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserJpaEntity>{
 
 	@Autowired
@@ -40,14 +41,12 @@ class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserJpaEntity>{
 	public void testUpdate() {
 		// Arrange
 		UserJpaEntity createdEntity = entityManager.persist(createEntity());
-		log.info(">>>>>>>>>>>>>> Email found : "+createdEntity.getEmail());
 		UserJpaEntity userToUpdate=UserJpaEntity.builder()
 				.email("myNewEmail@gmail.com")
 				.id(createdEntity.getId())
 				.firstName(createdEntity.getFirstName())
 				.username(createdEntity.getUsername())
 				.build();
-		log.info(">>>>>>>>>>>>>> Email found : "+userToUpdate.getEmail());
 		// Act
 		UserJpaEntity updatedUser = getRepository().saveAndFlush(userToUpdate);
 

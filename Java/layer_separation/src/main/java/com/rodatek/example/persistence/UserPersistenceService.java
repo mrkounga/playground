@@ -12,23 +12,38 @@ import com.rodatek.example.repository.UserJpaRepository;
 @Repository
 public class UserPersistenceService extends AbstractDtoJpaEntityPersistenceService<UserDto,UserJpaEntity>{
 
-	//private UserJpaRepository repo;
+	private UserJpaRepository repo;
 	
 	public UserPersistenceService(BaseJpaRepository<UserJpaEntity> repository) {
 		super(repository);
-		//this.repo=(UserJpaRepository) repository;
+		this.repo=(UserJpaRepository) repository;
 	}
 
 	@Override
 	public UserDto convertToLayerObjectUp(UserJpaEntity resourceToConvert) {
-		// TODO Auto-generated method stub
-		return null;
+		return resourceToConvert.getId()!=null?UserDto.builder()
+				.id(resourceToConvert.getId())
+				.email(resourceToConvert.getEmail())
+				.firstName(resourceToConvert.getFirstName())
+				.surname(resourceToConvert.getUsername())
+				.username(resourceToConvert.getUsername())
+				.build()
+				:null;	
 	}
 
 	@Override
-	public UserJpaEntity convertToLayerObjectDown(UserDto resourceToConvert) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserJpaEntity convertToLayerObjectDown(UserDto resourceToConvert) {		
+		return resourceToConvert.getId()!=null?UserJpaEntity.builder()
+				.id(resourceToConvert.getId())  
+				.email(resourceToConvert.getEmail())
+				.firstName(resourceToConvert.getFirstName())				
+				.username(resourceToConvert.getUsername())
+				.build()
+				:UserJpaEntity.builder()				
+				.email(resourceToConvert.getEmail())
+				.firstName(resourceToConvert.getFirstName())				
+				.username(resourceToConvert.getUsername())
+				.build();
 	}
 
 }

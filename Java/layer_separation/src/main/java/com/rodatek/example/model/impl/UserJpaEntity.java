@@ -26,6 +26,19 @@ public final class UserJpaEntity implements User, JpaEntity {
 	private final String firstName;
 	private final String username;
 	
+	private UserJpaEntity() {
+		this.id=null;
+		this.email=null;
+		this.firstName=null;
+		this.username=null;	
+	}
+	
+	private UserJpaEntity(Long id,String email,String firstname, String username) {
+		this.id=id;
+		this.email=email;
+		this.firstName=firstname;
+		this.username=username;
+	}
 	
 	@Override
 	public boolean isValid() {
