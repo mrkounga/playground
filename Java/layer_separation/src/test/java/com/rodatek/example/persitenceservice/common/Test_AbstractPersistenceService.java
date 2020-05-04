@@ -41,7 +41,7 @@ public abstract class Test_AbstractPersistenceService<D extends IDto> {
 		D newDto = givenDto();
 		
 		// Act
-		IDto createdDto = getPeristenceService().create(newDto);
+		D createdDto = getPeristenceService().create(newDto);
 
 		// Assert
 		assertThat(newDto.getId()).isNull();

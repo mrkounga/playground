@@ -1,4 +1,4 @@
-package com.rodatek.example.user.service;
+package com.rodatek.example.businessdomain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

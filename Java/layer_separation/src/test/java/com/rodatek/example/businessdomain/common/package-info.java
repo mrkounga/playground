@@ -1,0 +1,1 @@
+package com.rodatek.example.businessdomain.common;

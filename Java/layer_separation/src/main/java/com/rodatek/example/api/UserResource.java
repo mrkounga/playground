@@ -37,5 +37,23 @@ public class UserResource implements User, IResource {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public UserResource() {
+		this.id=null;
+		this.email=null;
+		this.firstName=null;
+		this.username=null;
+		this.surname=null;
+		this.fullName=null;
+	}
+	
+	public UserResource(Long id,String email, String firstname, String username, String surname, String fullname) {
+		this.id=id;
+		this.email=email;
+		this.firstName=firstname;
+		this.username=username;
+		this.surname=surname;
+		this.fullName=fullname;
+	}
 
 }
