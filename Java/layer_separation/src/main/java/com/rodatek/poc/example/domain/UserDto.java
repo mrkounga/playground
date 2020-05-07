@@ -1,4 +1,4 @@
-package com.rodatek.example.businessdomain;
+package com.rodatek.poc.example.domain;
 
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.domain.user.User;

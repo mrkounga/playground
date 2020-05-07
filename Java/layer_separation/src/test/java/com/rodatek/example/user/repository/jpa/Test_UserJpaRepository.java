@@ -3,35 +3,33 @@ package com.rodatek.example.user.repository.jpa;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.rodatek.common.repository.BaseRepository;
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
-import com.rodatek.example.model.impl.UserJpaEntity;
-import com.rodatek.example.repository.UserJpaRepository;
 import com.rodatek.example.repository.jpacommon.Test_AbstractJpaRepository;
+import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
 
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @DisplayName(value = "User Jpa repository Service")
-class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserJpaEntity>{
+class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserEntity>{
 
 	@Autowired
 	private UserJpaRepository repository;
 	
 
 	@Override
-	protected BaseJpaRepository<UserJpaEntity> getRepository() {		
+	protected BaseJpaRepository<UserEntity> getRepository() {		
 		return repository;
 	}
 
 	@Override
-	protected UserJpaEntity createEntity() {
-		UserJpaEntity myUser = UserJpaEntity.builder().email("mrkounga@gmail.com").firstName("Michel").username("TheKoung").build();		
+	protected UserEntity createEntity() {
+		UserEntity myUser = UserEntity.builder().email("mrkounga@gmail.com").firstName("Michel").username("TheKoung").build();		
 	return myUser;
 	}
 
@@ -40,15 +38,15 @@ class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserJpaEntity>{
 	@DisplayName("Test - Update Entity")
 	public void testUpdate() {
 		// Arrange
-		UserJpaEntity createdEntity = entityManager.persist(createEntity());
-		UserJpaEntity userToUpdate=UserJpaEntity.builder()
+		UserEntity createdEntity = entityManager.persist(createEntity());
+		UserEntity userToUpdate=UserEntity.builder()
 				.email("myNewEmail@gmail.com")
 				.id(createdEntity.getId())
 				.firstName(createdEntity.getFirstName())
 				.username(createdEntity.getUsername())
 				.build();
 		// Act
-		UserJpaEntity updatedUser = getRepository().saveAndFlush(userToUpdate);
+		UserEntity updatedUser = getRepository().saveAndFlush(userToUpdate);
 
 		// Assert
 		assertThat(updatedUser.getId()).isEqualTo(createdEntity.getId());

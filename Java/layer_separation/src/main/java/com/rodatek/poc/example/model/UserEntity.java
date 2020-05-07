@@ -1,4 +1,4 @@
-package com.rodatek.example.model.impl;
+package com.rodatek.poc.example.model;
 
 
 import javax.persistence.Entity;
@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 
+import org.springframework.stereotype.Component;
+
+import com.rodatek.common.model.IEntity;
 import com.rodatek.common.repository.jpa.JpaEntity;
 import com.rodatek.domain.user.User;
 
@@ -16,7 +19,8 @@ import lombok.Value;
 @Entity
 @Value
 @Builder
-public final class UserJpaEntity implements User, JpaEntity {
+@Component
+public final class UserEntity implements User, IEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,14 +30,14 @@ public final class UserJpaEntity implements User, JpaEntity {
 	private final String firstName;
 	private final String username;
 	
-	private UserJpaEntity() {
+	private UserEntity() {
 		this.id=null;
 		this.email=null;
 		this.firstName=null;
 		this.username=null;	
 	}
 	
-	private UserJpaEntity(Long id,String email,String firstname, String username) {
+	private UserEntity(Long id,String email,String firstname, String username) {
 		this.id=id;
 		this.email=email;
 		this.firstName=firstname;

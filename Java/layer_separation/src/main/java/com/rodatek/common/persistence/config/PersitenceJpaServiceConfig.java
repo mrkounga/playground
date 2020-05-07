@@ -5,10 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 
-@Configuration
-//@ComponentScan(useDefaultFilters = false, includeFilters = @ComponentScan.Filter
+//@Configuration
+//@ComponentScan(useDefaultFilters = true, includeFilters = @ComponentScan.Filter
 //(type = FilterType.REGEX, pattern = ".[persistence]"))
-@ComponentScan("com.rodatek.example.repository")
 public class PersitenceJpaServiceConfig {
 	
 	

@@ -1,13 +1,12 @@
-package com.rodatek.example.api;
+package com.rodatek.poc.example.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rodatek.common.restapi.AbstractController;
-import com.rodatek.common.restapi.ControllerService;
 
 
-@RestController
+//@RestController
 @RequestMapping(value = "/users")
 public class UserApiController  extends AbstractController<UserResource> implements UserApi  {
 

@@ -6,13 +6,13 @@ import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.business.service.BusinessService;
 import com.rodatek.common.converter.Convertable;
 
+public abstract class AbstractResourceDtoService<R extends IResource, D extends IDto>
+		implements ControllerService<R>, Convertable<R, D> {
 
-public abstract class AbstractResourceDtoService<R extends IResource, D extends IDto> implements ControllerService<R>,Convertable<R, D> {
-	
-	protected  BusinessService<D> service;
-	
+	protected final BusinessService<D> service;
+
 	public AbstractResourceDtoService(BusinessService<D> serviceToSet) {
-		this.service=serviceToSet;
+		this.service = serviceToSet;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public abstract class AbstractResourceDtoService<R extends IResource, D extends 
 	@Override
 	public void deleteResourceById(Long id) {
 		service.deleteDtoById(id);
-		
+
 	}
 
 	@Override

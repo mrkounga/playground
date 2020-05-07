@@ -1,11 +1,7 @@
 package com.rodatek.example.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.NoSuchElementException;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.restapi.ControllerService;
 import com.rodatek.example.api.common.Test_AbstractControllerService;
-import com.rodatek.example.businessdomain.UserDto;
+import com.rodatek.poc.example.api.UserResource;
+import com.rodatek.poc.example.api.UserResourceService;
+import com.rodatek.poc.example.domain.UserDto;
 
 @SpringJUnitConfig()
 @SpringBootTest

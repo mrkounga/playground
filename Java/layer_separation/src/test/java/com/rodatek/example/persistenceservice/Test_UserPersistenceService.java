@@ -1,44 +1,29 @@
 package com.rodatek.example.persistenceservice;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.NoSuchElementException;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.model.IEntity;
-import com.rodatek.common.persistence.PersistenceDtoService;
-import com.rodatek.common.persistence.config.PersitenceJpaServiceConfig;
-import com.rodatek.example.businessdomain.UserDto;
-import com.rodatek.example.model.impl.UserJpaEntity;
-import com.rodatek.example.persistence.UserPersistenceService;
+import com.rodatek.common.persistence.PersistenceService;
 import com.rodatek.example.persitenceservice.common.Test_AbstractPersistenceService;
+import com.rodatek.poc.example.domain.UserDto;
+import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.persistence.impl.UserJpaPersistenceService;
 
-//@DataJpaTest
-//@ContextConfiguration(classes = PersitenceJpaServiceConfig.class)
-@SpringJUnitConfig()
-@SpringBootTest
+
 @DisplayName(value = "User Persistence Service")
+//@Profile("jpa")
 class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDto> {
 
 	@Autowired
-	private UserPersistenceService userPersistenceService;
+	private PersistenceService<UserDto> userPersistenceService;
 	
-	@Override
-	protected PersistenceDtoService<UserDto> getPeristenceService() {
-		// TODO Auto-generated method stub
-		return userPersistenceService;
-	}
 
 	@Override
 	protected UserDto givenDto() {
@@ -49,7 +34,7 @@ class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDt
 
 	@Override
 	protected <E extends IEntity> E givenEntity() {
-		UserJpaEntity userJpaEntity = UserJpaEntity.builder().id(3L).email("mrkounga@gmail.com").firstName("Michel")
+		UserEntity userJpaEntity = UserEntity.builder().id(3L).email("mrkounga@gmail.com").firstName("Michel")
 				.username("TheKoung").build();
 		return (E) userJpaEntity;
 	}
@@ -65,11 +50,11 @@ class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDt
 	@Override
 	protected void testConvertToLayerObjectUp() {
 		// Arrange
-		UserJpaEntity existingUser = givenEntity();
+		UserEntity existingUser = givenEntity();
 		// act
-		UserDto loadedUser = userPersistenceService.convertToLayerObjectUp(existingUser);
+	//	UserDto loadedUser = userPersistenceService.convertEntityToDto(existingUser);
 		// assert
-		assertThat(loadedUser.getId()).isEqualTo(existingUser.getId());
+		//assertThat(loadedUser.getId()).isEqualTo(existingUser.getId());
 
 	}
 
@@ -78,10 +63,10 @@ class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDt
 	protected void testConvertToLayerObjectDown() {
 		// arrange
 		UserDto newUser = givenDto();
-		UserJpaEntity userJpaEntity = null;
+		UserEntity userJpaEntity = null;
 
 		// act - convert to entity
-		userJpaEntity = userPersistenceService.convertToLayerObjectDown(newUser);
+		//userJpaEntity = userPersistenceService.convertDtoToEntity(newUser);
 
 		// assert
 		assertThat(userJpaEntity.getEmail()).isEqualTo(newUser.getEmail());
@@ -103,6 +88,14 @@ class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDt
 		assertThat(userToUpdate.getId()).isEqualTo(createdUser.getId());
 		assertThat(userToUpdate.getEmail()).isNotEqualTo(createdUser.getEmail());
 	}
+
+	@Override
+	protected PersistenceService<UserDto> getPeristenceService() {
+		// TODO Auto-generated method stub
+		return userPersistenceService;
+	}
+
+	
 
 	
 }

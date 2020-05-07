@@ -1,4 +1,4 @@
-package com.rodatek.example.api;
+package com.rodatek.poc.example.api;
 
 import org.springframework.validation.annotation.Validated;
 

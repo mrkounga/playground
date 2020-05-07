@@ -7,21 +7,20 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.model.IEntity;
-import com.rodatek.common.persistence.PersistenceDtoService;
-import com.rodatek.example.businessdomain.UserDto;
+import com.rodatek.common.persistence.PersistenceService;
 
-@SpringJUnitConfig()
 @SpringBootTest
+@SpringJUnitConfig()
 @DisplayName(value = "Test - Persistence Service")
 public abstract class Test_AbstractPersistenceService<D extends IDto> {
 	
-	protected abstract PersistenceDtoService<D> getPeristenceService();
+	protected abstract PersistenceService<D> getPeristenceService();
 	
 	protected abstract D givenDto();
 	

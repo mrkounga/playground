@@ -14,11 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-
+import com.rodatek.common.model.IEntity;
 import com.rodatek.common.repository.config.RepositoryConfig;
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
 import com.rodatek.common.repository.jpa.JpaEntity;
@@ -27,10 +28,9 @@ import com.rodatek.common.repository.jpa.JpaEntity;
  * @author koungam
  *
  */
-@SpringJUnitConfig()
+
 @DataJpaTest
-//@ContextConfiguration(classes = { RepositoryConfig.class }, loader = AnnotationConfigContextLoader.class)
-public abstract class Test_AbstractJpaRepository<E extends JpaEntity> {
+public abstract class Test_AbstractJpaRepository<E extends IEntity> {
 
 	@Autowired
 	protected TestEntityManager entityManager;

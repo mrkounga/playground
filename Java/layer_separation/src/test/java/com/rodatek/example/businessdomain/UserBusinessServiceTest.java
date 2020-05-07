@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.rodatek.example.businessdomain.common.Test_AbstractCommonBusinessCrudOperation;
+import com.rodatek.poc.example.domain.UserDto;
 
 
 @DisplayName(value = "Test - User Business Service")

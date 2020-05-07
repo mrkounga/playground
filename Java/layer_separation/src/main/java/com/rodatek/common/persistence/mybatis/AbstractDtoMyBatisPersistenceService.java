@@ -1,35 +1,39 @@
-package com.rodatek.common.persistence.jpa;
+package com.rodatek.common.persistence.mybatis;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.model.IEntity;
+import com.rodatek.common.model.SqlEntity;
+import com.rodatek.common.repository.mybatis.BaseMyBatisRepository;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
 import com.rodatek.common.persistence.PersistenceService;
-import com.rodatek.common.persistence.converter.DtoEntityConverter;
-import com.rodatek.common.repository.BaseRepository;
-import com.rodatek.common.repository.jpa.BaseJpaRepository;
 
-//public abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends IEntity> implements PersistenceService<D>, DtoEntityConverter<D, E> {
-public abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends IEntity> extends AbstractDtoEntityPersistenceService<D,E> {
+
+//@Service
+//@Qualifier("myBatis")
+public abstract class AbstractDtoMyBatisPersistenceService<D extends IDto, E extends IEntity> extends AbstractDtoEntityPersistenceService<D,E> {
 	
-	protected final BaseJpaRepository<E> repository;
+	protected  BaseMyBatisRepository<E> repository;
 	
-	protected AbstractDtoJpaEntityPersistenceService(BaseJpaRepository<E> repository) {
+	public AbstractDtoMyBatisPersistenceService( BaseMyBatisRepository<E> repository) {
 		super(repository);
 		this.repository=repository;
-		// TODO Auto-generated constructor stub
 	}
 
-	
 
 	/*
-	 * public AbstractDtoJpaEntityPersistenceService(BaseJpaRepository<E>
-	 * jpaRepository) {
+	 * public D createDto(D dto) { return
+	 * convertToLayerObjectUp(repository.save(convertToLayerObjectDown(dto))); }
 	 * 
-	 * this.repository= jpaRepository; }
+	 * public Optional<D> getDtoById(Long id) { return
+	 * Optional.of(convertToLayerObjectUp(repository.findById(id).get())); }
 	 */
 	
+
 	@Override
 	public void delete(Long id) {
 		// Persistence service : precondition check to be implemented

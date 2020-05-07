@@ -3,13 +3,13 @@ package com.rodatek.common.business.service;
 import java.util.Optional;
 
 import com.rodatek.common.business.domain.IDto;
-import com.rodatek.common.persistence.PersistenceDtoService;
+import com.rodatek.common.persistence.PersistenceService;
 
 public abstract class AbstractBusinessService<D extends IDto> implements BusinessService<D> {
 	
-	private PersistenceDtoService<D> service;
+	private PersistenceService<D> service;
 	
-	public AbstractBusinessService(PersistenceDtoService<D> serv) {
+	public AbstractBusinessService(PersistenceService<D> serv) {
 		this.service = serv;
 	}
 
