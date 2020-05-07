@@ -4,19 +4,13 @@ package com.rodatek.poc.example.persistence.impl;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.rodatek.common.persistence.jpa.AbstractDtoJpaEntityPersistenceService;
-import com.rodatek.common.persistence.mongo.AbstractDtoMongoEntityPersistenceService;
 import com.rodatek.common.persistence.mybatis.AbstractDtoMyBatisPersistenceService;
-import com.rodatek.common.repository.jpa.BaseJpaRepository;
 import com.rodatek.poc.example.domain.UserDto;
 import com.rodatek.poc.example.model.UserEntity;
-import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
-import com.rodatek.poc.example.repository.mongo.UserMongoRepository;
 import com.rodatek.poc.example.repository.mybatis.UserMyBastisRepository;
 
-
 @Service
-@Profile("mybatis")
+@Profile("mybatisrepo")
 public class UserMyBatisPersistenceService extends AbstractDtoMyBatisPersistenceService<UserDto,UserEntity>  {
 
 	private final UserMyBastisRepository repository;

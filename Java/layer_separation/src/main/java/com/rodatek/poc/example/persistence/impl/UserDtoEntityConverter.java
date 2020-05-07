@@ -1,24 +1,10 @@
 package com.rodatek.poc.example.persistence.impl;
 
-
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
-import com.rodatek.common.persistence.jpa.AbstractDtoJpaEntityPersistenceService;
+import com.rodatek.common.persistence.converter.DtoEntityConverter;
 import com.rodatek.poc.example.domain.UserDto;
 import com.rodatek.poc.example.model.UserEntity;
-import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
 
-@Service
-@Profile("jparepo")
-public class UserJpaPersistenceService extends AbstractDtoJpaEntityPersistenceService<UserDto,UserEntity>  {
-
-	private final UserJpaRepository repository;
-	
-	public UserJpaPersistenceService(UserJpaRepository repo) {
-		super(repo);
-		this.repository=repo;
-	}
+public class UserDtoEntityConverter implements DtoEntityConverter<UserDto, UserEntity> {
 
 	@Override
 	public UserDto convertEntityToDto(UserEntity resourceToConvert) {
@@ -47,6 +33,4 @@ public class UserJpaPersistenceService extends AbstractDtoJpaEntityPersistenceSe
 					.build();
 		}
 
-	
-	
 }

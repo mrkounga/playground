@@ -1,4 +1,4 @@
-package com.rodatek.example.user.persistence.jpa;
+package com.rodatek.example.user.repository.jpa;
 
 public class Test_UserDtoEntityConverter {
 

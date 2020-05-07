@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import com.rodatek.common.model.IEntity;
-import com.rodatek.common.model.SqlEntity;
 import com.rodatek.common.repository.BaseRepository;
 
 @NoRepositoryBean

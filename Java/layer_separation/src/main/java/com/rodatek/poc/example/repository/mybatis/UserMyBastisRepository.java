@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-
 import com.rodatek.common.repository.mybatis.BaseMyBatisRepository;
 import com.rodatek.poc.example.model.UserEntity;
 

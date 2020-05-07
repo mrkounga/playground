@@ -6,7 +6,7 @@ import com.rodatek.common.business.service.BusinessService;
 import com.rodatek.common.restapi.AbstractResourceDtoService;
 import com.rodatek.poc.example.domain.UserDto;
 
-//@Service
+@Service
 public class UserResourceService extends AbstractResourceDtoService<UserResource,UserDto> {
 	
 	private BusinessService<UserDto> service;

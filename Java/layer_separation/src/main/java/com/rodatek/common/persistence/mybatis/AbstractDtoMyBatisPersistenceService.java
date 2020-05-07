@@ -2,19 +2,12 @@ package com.rodatek.common.persistence.mybatis;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.model.IEntity;
-import com.rodatek.common.model.SqlEntity;
-import com.rodatek.common.repository.mybatis.BaseMyBatisRepository;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
-import com.rodatek.common.persistence.PersistenceService;
+import com.rodatek.common.repository.mybatis.BaseMyBatisRepository;
 
 
-//@Service
-//@Qualifier("myBatis")
 public abstract class AbstractDtoMyBatisPersistenceService<D extends IDto, E extends IEntity> extends AbstractDtoEntityPersistenceService<D,E> {
 	
 	protected  BaseMyBatisRepository<E> repository;

@@ -8,7 +8,7 @@ import com.rodatek.poc.example.domain.UserDto;
 
 
 @DisplayName(value = "Test - User Business Service")
-class UserBusinessServiceTest extends Test_AbstractCommonBusinessCrudOperation<UserDto> {
+class Test_UserBusinessService extends Test_AbstractCommonBusinessCrudOperation<UserDto> {
 	
 	protected UserDto givenDto() {
 		UserDto userDto = UserDto.builder().email("mrkounga@gmail.com").firstName("Michel").surname("Kounga")

@@ -5,12 +5,9 @@ import java.util.Optional;
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.common.model.IEntity;
 import com.rodatek.common.persistence.AbstractDtoEntityPersistenceService;
-import com.rodatek.common.persistence.PersistenceService;
-import com.rodatek.common.persistence.converter.DtoEntityConverter;
-import com.rodatek.common.repository.BaseRepository;
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
 
-//public abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends IEntity> implements PersistenceService<D>, DtoEntityConverter<D, E> {
+
 public abstract class AbstractDtoJpaEntityPersistenceService<D extends IDto, E extends IEntity> extends AbstractDtoEntityPersistenceService<D,E> {
 	
 	protected final BaseJpaRepository<E> repository;

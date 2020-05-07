@@ -10,7 +10,6 @@ import javax.validation.constraints.Email;
 import org.springframework.stereotype.Component;
 
 import com.rodatek.common.model.IEntity;
-import com.rodatek.common.repository.jpa.JpaEntity;
 import com.rodatek.domain.user.User;
 
 import lombok.Builder;

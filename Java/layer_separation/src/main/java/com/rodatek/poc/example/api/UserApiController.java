@@ -1,7 +1,6 @@
 package com.rodatek.poc.example.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.rodatek.common.restapi.AbstractController;
 

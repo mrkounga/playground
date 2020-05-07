@@ -1,4 +1,4 @@
-package com.rodatek.common.domain;
+package com.rodatek.common.business.domain;
 
 public class BusinessException extends Exception {
 	private static final long serialVersionUID = 2811135034559497164L;

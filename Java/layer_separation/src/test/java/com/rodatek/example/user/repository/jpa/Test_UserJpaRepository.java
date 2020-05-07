@@ -7,13 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.rodatek.common.repository.BaseRepository;
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
 import com.rodatek.example.repository.jpacommon.Test_AbstractJpaRepository;
 import com.rodatek.poc.example.model.UserEntity;
 import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
-
-import lombok.extern.log4j.Log4j2;
 
 @DisplayName(value = "User Jpa repository Service")
 class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserEntity>{

@@ -4,12 +4,9 @@ import java.util.Optional;
 
 //import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Repository;
 
 import com.rodatek.common.model.IEntity;
 import com.rodatek.common.repository.BaseRepository;
-
-import lombok.extern.log4j.Log4j2;
 
 
 

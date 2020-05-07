@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rodatek.poc.example.api.UserResource;
 
-//@RestController
+@RestController
 public class AbstractController<R extends IResource> {
 
 	protected ControllerService<R> resourceService;
@@ -38,7 +38,7 @@ public class AbstractController<R extends IResource> {
 
 	@GetMapping()
 	public ResponseEntity<R> getOne() {
-		UserResource userResource = UserResource.builder().email("mrkounga@faketest.com").firstName("michel")
+		UserResource userResource = UserResource.builder().id(1L).email("mrkounga@faketest.com").firstName("michel")
 				.surname("kounga").build();
 		return new ResponseEntity(userResource, HttpStatus.FOUND);
 

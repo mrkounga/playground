@@ -5,23 +5,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.rodatek.common.model.IEntity;
 import com.rodatek.common.persistence.PersistenceService;
 import com.rodatek.example.persitenceservice.common.Test_AbstractPersistenceService;
 import com.rodatek.poc.example.domain.UserDto;
 import com.rodatek.poc.example.model.UserEntity;
-import com.rodatek.poc.example.persistence.impl.UserJpaPersistenceService;
 
 
 @DisplayName(value = "User Persistence Service")
-//@Profile("jpa")
+@Profile("jparepo")
 class Test_UserPersistenceService extends Test_AbstractPersistenceService<UserDto> {
 
 	@Autowired
+	//@Qualifier(value = "mybatisrepo")
 	private PersistenceService<UserDto> userPersistenceService;
 	
 
