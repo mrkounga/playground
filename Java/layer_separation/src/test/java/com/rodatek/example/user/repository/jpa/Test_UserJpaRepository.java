@@ -9,24 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rodatek.common.repository.jpa.BaseJpaRepository;
 import com.rodatek.example.repository.jpacommon.Test_AbstractJpaRepository;
-import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.repository.jpa.UserJpaEntity;
 import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
 
 @DisplayName(value = "User Jpa repository Service")
-class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserEntity>{
+class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserJpaEntity>{
 
 	@Autowired
 	private UserJpaRepository repository;
 	
 
 	@Override
-	protected BaseJpaRepository<UserEntity> getRepository() {		
+	protected BaseJpaRepository<UserJpaEntity> getRepository() {		
 		return repository;
 	}
 
 	@Override
-	protected UserEntity createEntity() {
-		UserEntity myUser = UserEntity.builder().email("mrkounga@gmail.com").firstName("Michel").username("TheKoung").build();		
+	protected UserJpaEntity createEntity() {
+		UserJpaEntity myUser = UserJpaEntity.builder().email("mrkounga@gmail.com").firstname("Michel").username("TheKoung").build();		
 	return myUser;
 	}
 
@@ -35,15 +35,15 @@ class Test_UserJpaRepository  extends Test_AbstractJpaRepository<UserEntity>{
 	@DisplayName("Test - Update Entity")
 	public void testUpdate() {
 		// Arrange
-		UserEntity createdEntity = entityManager.persist(createEntity());
-		UserEntity userToUpdate=UserEntity.builder()
+		UserJpaEntity createdEntity = entityManager.persist(createEntity());
+		UserJpaEntity userToUpdate=UserJpaEntity.builder()
 				.email("myNewEmail@gmail.com")
 				.id(createdEntity.getId())
-				.firstName(createdEntity.getFirstName())
+				.firstname(createdEntity.getFirstname())
 				.username(createdEntity.getUsername())
 				.build();
 		// Act
-		UserEntity updatedUser = getRepository().saveAndFlush(userToUpdate);
+		UserJpaEntity updatedUser = getRepository().saveAndFlush(userToUpdate);
 
 		// Assert
 		assertThat(updatedUser.getId()).isEqualTo(createdEntity.getId());

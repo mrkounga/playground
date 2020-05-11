@@ -1,17 +1,22 @@
 package com.rodatek.poc.example.persistence.impl;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import com.rodatek.common.model.IEntity;
 import com.rodatek.common.persistence.mongo.AbstractDtoMongoEntityPersistenceService;
-import com.rodatek.poc.example.domain.UserDto;
-import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.businessdomain.UserDto;
+import com.rodatek.poc.example.repository.jpa.UserJpaEntity;
+import com.rodatek.poc.example.repository.mongo.UserMongoEntity;
 import com.rodatek.poc.example.repository.mongo.UserMongoRepository;
 
 @Service
 @Profile("mongorepo")
-public class UserMongoPersistenceService extends AbstractDtoMongoEntityPersistenceService<UserDto,UserEntity>  {
+public class UserMongoPersistenceService extends AbstractDtoMongoEntityPersistenceService<UserDto,UserMongoEntity>  {
 
 	private final UserMongoRepository repository;
 	
@@ -21,11 +26,11 @@ public class UserMongoPersistenceService extends AbstractDtoMongoEntityPersisten
 	}
 
 	@Override
-	public UserDto convertEntityToDto(UserEntity resourceToConvert) {
+	public UserDto convertEntityToDto(UserMongoEntity resourceToConvert) {
 			return resourceToConvert.getId()!=null?UserDto.builder()
 					.id(resourceToConvert.getId())
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())
+					.firstname(resourceToConvert.getFirstname())
 					.surname(resourceToConvert.getUsername())
 					.username(resourceToConvert.getUsername())
 					.build()
@@ -33,19 +38,21 @@ public class UserMongoPersistenceService extends AbstractDtoMongoEntityPersisten
 		}
 
 	@Override
-	public UserEntity convertDtoToEntity(UserDto resourceToConvert) {		
-			return resourceToConvert.getId()!=null?UserEntity.builder()
+	public UserMongoEntity convertDtoToEntity(UserDto resourceToConvert) {		
+			return resourceToConvert.getId()!=null?UserMongoEntity.builder()
 					.id(resourceToConvert.getId())  
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
 					.build()
-					:UserEntity.builder()				
+					:UserMongoEntity.builder()				
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
 					.build();
 		}
+
+	
 
 	
 	

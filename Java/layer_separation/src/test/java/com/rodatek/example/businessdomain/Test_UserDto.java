@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.rodatek.poc.example.domain.UserDto;
+import com.rodatek.poc.example.businessdomain.UserDto;
 
 //In progress
 @SpringJUnitConfig()

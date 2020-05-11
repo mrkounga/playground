@@ -1,13 +1,15 @@
 package com.rodatek.poc.example.api;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rodatek.common.business.service.BusinessService;
-import com.rodatek.common.restapi.AbstractResourceDtoService;
-import com.rodatek.poc.example.domain.UserDto;
+import com.rodatek.common.restapi.AbstractResourceToDtoService;
+import com.rodatek.poc.example.businessdomain.UserDto;
 
 @Service
-public class UserResourceService extends AbstractResourceDtoService<UserResource,UserDto> {
+@Transactional
+public class UserResourceService extends AbstractResourceToDtoService<UserResource,UserDto> {
 	
 	private BusinessService<UserDto> service;
 
@@ -17,26 +19,26 @@ public class UserResourceService extends AbstractResourceDtoService<UserResource
 	}
 
 	@Override
-	public UserResource convertToLayerObjectUp(UserDto userDto) {
-		
-		// TODO Auto-generated method stub
+	public UserResource convertDtoToResource(UserDto userDto) {
+
 		return UserResource.builder()
 				.id(userDto.getId())
 				.email(userDto.getEmail())
-				.firstName(userDto.getFirstName())
-				.surname(userDto.getUsername())
-				.fullName(userDto.getFirstName()+" "+userDto.getUsername())
+				.firstname(userDto.getFirstname())
+				.username(userDto.getUsername())
+				.surname(userDto.getSurname())				
 				.build();
 	}
 
 	@Override
-	public UserDto convertToLayerObjectDown(UserResource userResource) {
+	public UserDto convertResourceToDto(UserResource userResource) {
 		
 		return UserDto.builder()
 				.id(userResource.getId())
 				.email(userResource.getEmail())
-				.firstName(userResource.getFirstName())
-				.surname(userResource.getUsername())
+				.firstname(userResource.getFirstname())
+				.username(userResource.getUsername())
+				.surname(userResource.getSurname())
 				.build();
 	}
 

@@ -1,6 +1,7 @@
 package com.rodatek.common.base;
 
+import java.io.Serializable;
+
 public interface BaseObject {
-	Long getId();
 	boolean isValid();
 }

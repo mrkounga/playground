@@ -1,19 +1,19 @@
-package com.rodatek.poc.example.domain;
+package com.rodatek.poc.example.businessdomain;
 
 import com.rodatek.common.business.domain.IDto;
 import com.rodatek.domain.user.User;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
 @Builder
-@Value
-public class UserDto implements User, IDto{
+@Data
+public class UserDto implements  IDto{
 	
-	private Long id;
+	private String id;
 	private String username;
 	private String surname;
-	private String firstName;
+	private String firstname;
 	private String email;
 	
 	
@@ -21,5 +21,12 @@ public class UserDto implements User, IDto{
 	public boolean isValid() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 }

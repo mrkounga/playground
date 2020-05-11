@@ -1,17 +1,17 @@
 package com.rodatek.poc.example.persistence.impl;
 
 import com.rodatek.common.persistence.converter.DtoEntityConverter;
-import com.rodatek.poc.example.domain.UserDto;
-import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.businessdomain.UserDto;
+import com.rodatek.poc.example.repository.jpa.UserJpaEntity;
 
-public class UserDtoEntityConverter implements DtoEntityConverter<UserDto, UserEntity> {
+public class UserDtoEntityConverter implements DtoEntityConverter<UserDto, UserJpaEntity> {
 
 	@Override
-	public UserDto convertEntityToDto(UserEntity resourceToConvert) {
+	public UserDto convertEntityToDto(UserJpaEntity resourceToConvert) {
 			return resourceToConvert.getId()!=null?UserDto.builder()
-					.id(resourceToConvert.getId())
+					.id(Long.toString(resourceToConvert.getId()))
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())
+					.firstname(resourceToConvert.getFirstname())
 					.surname(resourceToConvert.getUsername())
 					.username(resourceToConvert.getUsername())
 					.build()
@@ -19,16 +19,16 @@ public class UserDtoEntityConverter implements DtoEntityConverter<UserDto, UserE
 		}
 
 	@Override
-	public UserEntity convertDtoToEntity(UserDto resourceToConvert) {		
-			return resourceToConvert.getId()!=null?UserEntity.builder()
-					.id(resourceToConvert.getId())  
+	public UserJpaEntity convertDtoToEntity(UserDto resourceToConvert) {		
+			return resourceToConvert.getId()!=null?UserJpaEntity.builder()
+					.id(Long.parseLong(resourceToConvert.getId()) )
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
 					.build()
-					:UserEntity.builder()				
+					:UserJpaEntity.builder()				
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
 					.build();
 		}

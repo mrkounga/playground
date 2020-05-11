@@ -12,16 +12,16 @@ import lombok.Value;
 @Validated
 @Builder
 @Value
-public class UserResource implements User, IResource {
+public class UserResource implements  IResource {
 
 	@JsonProperty("id")
-	private Long id;
+	private String id;
 
 	@JsonProperty("username")
 	private String username;
 
 	@JsonProperty("firstname")
-	private String firstName;
+	private String firstname;
 
 	@JsonProperty("surname")
 	private String surname;
@@ -38,22 +38,7 @@ public class UserResource implements User, IResource {
 		return false;
 	}
 	
-	public UserResource() {
-		this.id=null;
-		this.email=null;
-		this.firstName=null;
-		this.username=null;
-		this.surname=null;
-		this.fullName=null;
-	}
 	
-	public UserResource(Long id,String email, String firstname, String username, String surname, String fullname) {
-		this.id=id;
-		this.email=email;
-		this.firstName=firstname;
-		this.username=username;
-		this.surname=surname;
-		this.fullName=fullname;
-	}
+	
 
 }

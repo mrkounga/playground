@@ -1,17 +1,21 @@
 package com.rodatek.poc.example.persistence.impl;
 
 
+import java.util.Optional;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rodatek.common.persistence.jpa.AbstractDtoJpaEntityPersistenceService;
-import com.rodatek.poc.example.domain.UserDto;
-import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.businessdomain.UserDto;
+import com.rodatek.poc.example.repository.jpa.UserJpaEntity;
 import com.rodatek.poc.example.repository.jpa.UserJpaRepository;
 
 @Service
 @Profile("jparepo")
-public class UserJpaPersistenceService extends AbstractDtoJpaEntityPersistenceService<UserDto,UserEntity>  {
+public class UserJpaPersistenceService extends AbstractDtoJpaEntityPersistenceService<UserDto,UserJpaEntity>   {
 
 	private final UserJpaRepository repository;
 	
@@ -20,30 +24,32 @@ public class UserJpaPersistenceService extends AbstractDtoJpaEntityPersistenceSe
 		this.repository=repo;
 	}
 
-	@Override
-	public UserDto convertEntityToDto(UserEntity resourceToConvert) {
+	@Override //throw exception
+	public UserDto convertEntityToDto(UserJpaEntity resourceToConvert) {
 			return resourceToConvert.getId()!=null?UserDto.builder()
-					.id(resourceToConvert.getId())
+					.id(Long.toString(resourceToConvert.getId()))
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())
-					.surname(resourceToConvert.getUsername())
+					.firstname(resourceToConvert.getFirstname())
+					.surname(resourceToConvert.getSurname())
 					.username(resourceToConvert.getUsername())
 					.build()
 					:null;	
 		}
 
-	@Override
-	public UserEntity convertDtoToEntity(UserDto resourceToConvert) {		
-			return resourceToConvert.getId()!=null?UserEntity.builder()
-					.id(resourceToConvert.getId())  
+	@Override //throw exception
+	public UserJpaEntity convertDtoToEntity(UserDto resourceToConvert) {		
+			return resourceToConvert.getId()!=null?UserJpaEntity.builder()
+					.id(Long.parseLong(resourceToConvert.getId()) )
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
+					.surname(resourceToConvert.getSurname())
 					.build()
-					:UserEntity.builder()				
+					:UserJpaEntity.builder()				
 					.email(resourceToConvert.getEmail())
-					.firstName(resourceToConvert.getFirstName())				
+					.firstname(resourceToConvert.getFirstname())				
 					.username(resourceToConvert.getUsername())
+					.surname(resourceToConvert.getSurname())
 					.build();
 		}
 

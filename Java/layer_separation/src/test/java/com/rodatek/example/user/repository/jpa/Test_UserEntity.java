@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.rodatek.poc.example.model.UserEntity;
+import com.rodatek.poc.example.repository.jpa.UserJpaEntity;
 
 @SpringJUnitConfig
 public class Test_UserEntity  {
@@ -16,7 +16,7 @@ public class Test_UserEntity  {
 	void creationUserEntity() {
 		
 		//Act
-		UserEntity userJpaEntity = UserEntity.builder()
+		UserJpaEntity userJpaEntity = UserJpaEntity.builder()
 				.email("test")
 				.build();
 		
