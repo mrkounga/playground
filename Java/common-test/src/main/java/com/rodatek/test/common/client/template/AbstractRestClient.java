@@ -125,25 +125,24 @@ public abstract class AbstractRestClient<T extends IDto> implements IRestClient<
 
     // find - all (sorted, paginated)
 
-   // @Override
-    //public final List<T> findAllSorted(final String sortBy, final String sortOrder) {
-    //    final Response findAllResponse = findAllByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
-     //   return marshaller.<T> decodeList(findAllResponse.getBody().asString(), clazz);
-    //}
+    @Override
+    public final List<T> findAllSorted(final String sortBy, final String sortOrder) {
+        final Response findAllResponse = findAllByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
+        return marshaller.<T> decodeList(findAllResponse.getBody().asString(), clazz);
+    }
 
-	/*
-	 * @Override public final List<T> findAllPaginated(final int page, final int
-	 * size) { final Response allPaginatedAsResponse =
-	 * findAllPaginatedAsResponse(page, size); return
-	 * getMarshaller().decodeList(allPaginatedAsResponse.asString(), clazz); }
-	 * 
-	 * @Override public final List<T> findAllPaginatedAndSorted(final int page,
-	 * final int size, final String sortBy, final String sortOrder) { final Response
-	 * allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page,
-	 * size, sortBy, sortOrder); return
-	 * getMarshaller().decodeList(allPaginatedAndSortedAsResponse.asString(),
-	 * clazz); }
-	 */
+    @Override
+    public final List<T> findAllPaginated(final int page, final int size) {
+        final Response allPaginatedAsResponse = findAllPaginatedAsResponse(page, size);
+        return getMarshaller().decodeList(allPaginatedAsResponse.asString(), clazz);
+    }
+
+    @Override
+    public final List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
+        final Response allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder);
+        return getMarshaller().decodeList(allPaginatedAndSortedAsResponse.asString(), clazz);
+    }
+
     @Override
     public final Response findAllPaginatedAndSortedAsResponse(final int page, final int size, final String sortBy, final String sortOrder) {
         return findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder, null);

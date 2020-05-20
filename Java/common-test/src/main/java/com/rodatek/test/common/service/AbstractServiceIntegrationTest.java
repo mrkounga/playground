@@ -11,6 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.domain.Sort;
 
+
 import com.rodatek.common.persistence.model.INameableEntity;
 import com.rodatek.common.persistence.service.IService;
 import com.rodatek.common.util.SearchField;
@@ -80,17 +81,17 @@ public abstract class AbstractServiceIntegrationTest<T extends INameableEntity> 
         persistNewEntity();
 
         // When
-      //  final List<T> resourcesSorted = getApi().findAllSorted(SearchField.name.name(), Sort.Direction.ASC.name());
+        final List<T> resourcesSorted = getApi().findAllSorted(SearchField.name.name(), Sort.Direction.ASC.name());
 
         // Then
-        //assertTrue(new OrderByName<T>().isOrdered(resourcesSorted));
+        assertTrue(new OrderByName<T>().isOrdered(resourcesSorted));
     }
 
     // find - all - pagination and sorting
 
     @Test
     /**/public final void whenResourcesAreRetrievedPaginatedAndSorted_thenNoExceptions() {
-      //  getApi().findAllPaginatedAndSorted(0, 41, SearchField.name.name(), Sort.Direction.DESC.name());
+        getApi().findAllPaginatedAndSorted(0, 41, SearchField.name.name(), Sort.Direction.DESC.name());
     }
 
     @Test
@@ -99,10 +100,10 @@ public abstract class AbstractServiceIntegrationTest<T extends INameableEntity> 
         persistNewEntity();
 
         // When
-     //   final List<T> resourcesPaginatedAndSorted = getApi().findAllPaginatedAndSorted(0, 4, SearchField.name.name(), Sort.Direction.ASC.name());
+        final List<T> resourcesPaginatedAndSorted = getApi().findAllPaginatedAndSorted(0, 4, SearchField.name.name(), Sort.Direction.ASC.name());
 
         // Then
-       // assertTrue(new OrderByName<T>().isOrdered(resourcesPaginatedAndSorted));
+        assertTrue(new OrderByName<T>().isOrdered(resourcesPaginatedAndSorted));
     }
 
     // template method

@@ -34,10 +34,10 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
     @Test
     public final void givenResourceDoesNotExist_whenResourceIsRetrieved_thenNoResourceIsReceived() {
         // When
-        //final T createdResource = getApi().findOne(IDUtil.randomPositiveLong());
+        final T createdResource = getApi().findOne(IDUtil.randomPositiveLong());
 
         // Then
-       // assertNull(createdResource);
+        assertNull(createdResource);
     }
 
     @Test
@@ -54,15 +54,15 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
     @Test
     public void givenResourceExists_whenResourceIsRetrieved_thenTheResultIsNotNull() {
         final T existingResource = persistNewEntity();
-       // final T retrievedResource = getApi().findOne(existingResource.getId());
-        //assertNotNull(retrievedResource);
+        final T retrievedResource = getApi().findOne(existingResource.getId());
+        assertNotNull(retrievedResource);
     }
 
     @Test
     public void givenResourceExists_whenResourceIsRetrieved_thenResourceIsRetrievedCorrectly() {
         final T existingResource = persistNewEntity();
-      //  final T retrievedResource = getApi().findOne(existingResource.getId());
-       // assertEquals(existingResource, retrievedResource);
+        final T retrievedResource = getApi().findOne(existingResource.getId());
+        assertEquals(existingResource, retrievedResource);
     }
 
     // find - one - by name
@@ -118,7 +118,7 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
 
     @Test
     public final void whenResourcesAreRetrievedPaginated_thenNoExceptions() {
-       // getApi().findAllPaginated(1, 1);
+        getApi().findAllPaginated(1, 1);
     }
 
     @Test
@@ -126,32 +126,32 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
         persistNewEntity();
 
         // When
-      //  final List<T> allPaginated = getApi().findAllPaginated(0, 1);
+        final List<T> allPaginated = getApi().findAllPaginated(0, 1);
 
         // Then
-      //  assertFalse(allPaginated.isEmpty());
+        assertFalse(allPaginated.isEmpty());
     }
 
     // find - all - sorting
 
-   // @Test
-    //public final void whenResourcesAreRetrievedSortedDescById_thenNoExceptions() {
-     //   getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.DESC.name());
-    //}
+    @Test
+    public final void whenResourcesAreRetrievedSortedDescById_thenNoExceptions() {
+        getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.DESC.name());
+    }
 
- //   @Test
-   // public final void whenResourcesAreRetrievedSortedAscById_thenResultsAreOrderedCorrectly() {
-     //   final List<T> resourcesOrderedById = getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.ASC.name());
+    @Test
+    public final void whenResourcesAreRetrievedSortedAscById_thenResultsAreOrderedCorrectly() {
+        final List<T> resourcesOrderedById = getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.ASC.name());
 
-       // assertTrue(new OrderById<T>().isOrdered(resourcesOrderedById));
-    //}
+        assertTrue(new OrderById<T>().isOrdered(resourcesOrderedById));
+    }
 
-  //  @Test
-   // public final void whenResourcesAreRetrievedSortedDescById_thenResultsAreOrderedCorrectly() {
-     //   final List<T> resourcesOrderedById = getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.DESC.name());
+    @Test
+    public final void whenResourcesAreRetrievedSortedDescById_thenResultsAreOrderedCorrectly() {
+        final List<T> resourcesOrderedById = getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.DESC.name());
 
-       // assertTrue(new OrderById<T>().reverse().isOrdered(resourcesOrderedById));
-   // }
+        assertTrue(new OrderById<T>().reverse().isOrdered(resourcesOrderedById));
+    }
 
     // create
 
@@ -266,7 +266,6 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
     }
 
     @Test
-    @Ignore("Issue with the Optional Empty..will look into it")
     public final void givenResourceExists_whenResourceIsDeleted_thenResourceNoLongerExists() {
         // Given
         final T existingResource = persistNewEntity();
@@ -276,7 +275,6 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
 
         // Then
         assertNull(getApi().findOne(existingResource.getId()));
-    
     }
 
     // template method
