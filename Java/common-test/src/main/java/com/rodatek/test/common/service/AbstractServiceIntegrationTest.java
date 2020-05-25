@@ -11,13 +11,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.domain.Sort;
 
-
 import com.rodatek.common.persistence.model.INameableEntity;
 import com.rodatek.common.persistence.service.IService;
 import com.rodatek.common.util.SearchField;
 import com.rodatek.common.util.order.OrderByName;
-
-
 
 public abstract class AbstractServiceIntegrationTest<T extends INameableEntity> extends AbstractRawServiceIntegrationTest<T> {
 

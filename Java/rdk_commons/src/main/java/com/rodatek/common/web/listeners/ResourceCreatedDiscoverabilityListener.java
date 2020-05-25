@@ -15,8 +15,7 @@ import static com.rodatek.common.web.WebConstants.PATH_SEP;
 
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-@Component
-public  class ResourceCreatedDiscoverabilityListener implements ApplicationListener<AfterResourceCreatedEvent> {
+public abstract class ResourceCreatedDiscoverabilityListener implements ApplicationListener<AfterResourceCreatedEvent> {
 
     @Autowired
     private IUriMapper uriMapper;
@@ -47,11 +46,10 @@ public  class ResourceCreatedDiscoverabilityListener implements ApplicationListe
 
     protected String calculatePathToResource(final Class clazz) {
         final String resourceName = uriMapper.getUriBase(clazz);
-        final String path = PATH_SEP + resourceName + "/{id}";
-        System.out.println(">>>>>>>>>>>>>>>>> Path : "+path);
+        final String path = getBase() + resourceName + "/{id}";
         return path;
     }
 
-   // protected abstract String getBase();
+    protected abstract String getBase();
 
 }

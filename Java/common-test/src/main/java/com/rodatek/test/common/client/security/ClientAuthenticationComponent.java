@@ -7,7 +7,7 @@ import com.google.common.base.Preconditions;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.specification.RequestSpecification;
 
-@Component
+//@Component
 public class ClientAuthenticationComponent implements ITestAuthenticator {
 
     public ClientAuthenticationComponent() {
@@ -17,7 +17,7 @@ public class ClientAuthenticationComponent implements ITestAuthenticator {
     // API
 
     @Override
-    public final RequestSpecification givenBasicAuthenticated(final String username, final String password) {
+    public final RequestSpecification givenAuthenticated(final String username, final String password) {
         Preconditions.checkNotNull(username);
         Preconditions.checkNotNull(password);
         return RestAssured.given().auth().preemptive().basic(username, password);
